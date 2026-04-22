@@ -16,11 +16,7 @@ var PORT = process.env.PORT || 3001;
 var mongoUri = process.env.MONGODB_URI;
 var omdbKey = process.env.OMDB_API_KEY;
 var sessionSecret = process.env.SESSION_SECRET || "dev-only-secret-change-me";
-
-if (!mongoUri) {
-  console.log("need MONGODB_URI in .env");
-  process.exit(1);
-}
+var dbReadyPromise = null;
 
 //mongo client we use for the whole server
 var client = new MongoClient(mongoUri);
@@ -45,6 +41,32 @@ function getDb() {
   return db;
 }
 
+function ensureDb() {
+  if (db) {
+    return Promise.resolve(db);
+  }
+  if (dbReadyPromise) {
+    return dbReadyPromise;
+  }
+  if (!mongoUri) {
+    return Promise.reject(new Error("need MONGODB_URI env var"));
+  }
+  dbReadyPromise = client
+    .connect()
+    .then(async function () {
+      db = client.db("popcorn");
+      await db.collection("users").createIndex({ username: 1 }, { unique: true });
+      await db.collection("user_movies").createIndex({ userId: 1, imdbId: 1 }, { unique: true });
+      console.log("mongodb connected");
+      return db;
+    })
+    .catch(function (err) {
+      dbReadyPromise = null;
+      throw err;
+    });
+  return dbReadyPromise;
+}
+
 //stops api if you arent logged in
 function requireLogin(req, res, next) {
   if (!req.session.userId) {
@@ -53,6 +75,16 @@ function requireLogin(req, res, next) {
   }
   next();
 }
+
+app.use("/api", async function (req, res, next) {
+  try {
+    await ensureDb();
+    next();
+  } catch (e) {
+    console.log("db connect error", e);
+    res.status(500).json({ ok: false, error: "database not ready" });
+  }
+});
 
 //implementing register route
 app.post("/api/register", async function (req, res) {
@@ -313,15 +345,9 @@ app.delete("/api/my-movies/:imdbId", requireLogin, async function (req, res) {
   }
 });
 
-//starting mongo connection then the web server
-async function start() {
-  await client.connect();
-  db = client.db("popcorn");
-  //indexes so usernames dont duplicate and same movie doesnt duplicate per user
-  await db.collection("users").createIndex({ username: 1 }, { unique: true });
-  await db.collection("user_movies").createIndex({ userId: 1, imdbId: 1 }, { unique: true });
-  console.log("mongodb connected");
-
+//starting local web server on laptop
+async function startLocal() {
+  await ensureDb();
   //using createServer so we can listen for port errors before listen finishes
   var server = http.createServer(app);
   server.on("error", function (err) {
@@ -340,7 +366,11 @@ async function start() {
   });
 }
 
-start().catch(function (err) {
-  console.log("start failed", err);
-  process.exit(1);
-});
+if (require.main === module) {
+  startLocal().catch(function (err) {
+    console.log("start failed", err);
+    process.exit(1);
+  });
+}
+
+module.exports = app;
