@@ -1,0 +1,302 @@
+/* page reset */
+* {
+  box-sizing: border-box;
+}
+
+/* basic page colors */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff8e7;
+  color: #2b2115;
+  line-height: 1.5;
+}
+
+/* header bar across the top */
+.top {
+  background: #3d2914;
+  color: #fff8e7;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.tagline {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* login buttons area */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.auth-area button,
+.auth-area .pill {
+  background: #f4c95d;
+  color: #2b2115;
+  border: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.auth-area button:hover {
+  filter: brightness(1.05);
+}
+
+.pill {
+  display: inline-block;
+}
+
+/* center column */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+/* white boxes for each section */
+.card {
+  background: #fff;
+  border: 1px solid #d9c4a3;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.15rem;
+  color: #5c3d1e;
+}
+
+.hint {
+  font-size: 0.88rem;
+  color: #555;
+  margin: 0 0 0.75rem;
+}
+
+.welcome {
+  margin: 0 0 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid #c8b08a;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+textarea {
+  max-width: 100%;
+  min-height: 70px;
+  resize: vertical;
+}
+
+/* orange buttons */
+button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #c45c26;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #a34b1f;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.row.tight {
+  margin-bottom: 0.5rem;
+}
+
+.row input[type="text"] {
+  flex: 1;
+  min-width: 180px;
+  max-width: none;
+}
+
+.switch {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.switch a {
+  color: #c45c26;
+}
+
+.msg {
+  min-height: 1.25rem;
+  font-size: 0.9rem;
+  color: #a12a2a;
+}
+
+/* search hits */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.hit {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.5rem;
+  border: 1px solid #e5d3b8;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fffdf7;
+}
+
+.hit:hover {
+  border-color: #c45c26;
+}
+
+.hit img {
+  width: 54px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #ddd;
+}
+
+.hit .meta {
+  flex: 1;
+}
+
+.hit .title {
+  font-weight: bold;
+}
+
+.detail-box {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.detail-box.empty {
+  color: #777;
+  font-style: italic;
+}
+
+.detail-box img {
+  width: 120px;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.detail-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-actions label {
+  margin-bottom: 0;
+}
+
+.inline-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.inline-btns button {
+  margin-top: 0;
+}
+
+.secondary {
+  background: #6b5a45;
+}
+
+.secondary:hover {
+  background: #554836;
+}
+
+/* lists under watchlist */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.movie-row {
+  display: flex;
+  gap: 0.75rem;
+  border: 1px solid #e5d3b8;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: #fffdf7;
+}
+
+.movie-row img {
+  width: 56px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #ddd;
+}
+
+.movie-row .body {
+  flex: 1;
+}
+
+.stars {
+  color: #c45c26;
+  letter-spacing: 0.1em;
+}
+
+.small {
+  font-size: 0.88rem;
+  color: #444;
+}
+
+.hidden {
+  display: none !important;
+}

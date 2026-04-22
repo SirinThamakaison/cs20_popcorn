@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Popcorn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div>
+        <h1>Popcorn</h1>
+        <p class="tagline">movie list thing for class</p>
+      </div>
+    </div>
+    <div id="authArea" class="auth-area"></div>
+  </header>
+
+  <main>
+    <section id="loginSection" class="card">
+      <h2>log in</h2>
+      <p class="hint">so your stuff saves</p>
+      <label>username <input type="text" id="loginUser" /></label>
+      <label>password <input type="password" id="loginPass" /></label>
+      <button type="button" id="btnLogin">log in</button>
+      <p class="switch">new? <a href="#" id="linkShowRegister">register</a></p>
+      <p id="loginMsg" class="msg"></p>
+    </section>
+
+    <section id="registerSection" class="card hidden">
+      <h2>register</h2>
+      <label>username <input type="text" id="regUser" /></label>
+      <label>password <input type="password" id="regPass" /></label>
+      <button type="button" id="btnRegister">make account</button>
+      <p class="switch">have account? <a href="#" id="linkShowLogin">log in</a></p>
+      <p id="regMsg" class="msg"></p>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <p class="welcome">hi <strong id="welcomeName"></strong>, search a movie, add it to your watchlist, or mark it as seen with a rating and a short review.</p>
+
+      <section class="card">
+        <h2>search</h2>
+        <div class="row">
+          <input type="text" id="searchInput" placeholder="movie name" />
+          <button type="button" id="btnSearch">go</button>
+        </div>
+        <p id="searchMsg" class="msg"></p>
+        <div id="searchResults" class="results"></div>
+      </section>
+
+      <section class="card">
+        <h2>movie info</h2>
+        <p class="hint">click a result above</p>
+        <div id="detailBox" class="detail-box empty">nothing picked</div>
+      </section>
+
+      <section class="card">
+        <h2>watch later</h2>
+        <div class="row tight">
+          <label>sort
+            <select id="sortWant">
+              <option value="added">newest</option>
+              <option value="title">a-z title</option>
+            </select>
+          </label>
+          <button type="button" id="btnRefreshWant">reload</button>
+        </div>
+        <div id="listWant" class="list"></div>
+      </section>
+
+      <section class="card">
+        <h2>already watched</h2>
+        <div class="row tight">
+          <label>sort
+            <select id="sortSeen">
+              <option value="rating_high">stars high</option>
+              <option value="rating_low">stars low</option>
+              <option value="title">a-z title</option>
+              <option value="added">newest edit</option>
+            </select>
+          </label>
+          <button type="button" id="btnRefreshSeen">reload</button>
+        </div>
+        <div id="listSeen" class="list"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
